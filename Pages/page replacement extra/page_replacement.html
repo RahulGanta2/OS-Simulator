@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    body {
+      font-size: 17px !important;
+      font-family: 'Orbitron', sans-serif !important; 
+    }
+   
+    #cover{
+      background-color: #ffffff;
+    }
+    #algorithmInfoBtn{
+      background-color: #35a08e;
+  border: none; 
+  border-radius: 5px; 
+  padding: 10px 20px; 
+  color: #fff; 
+  cursor: pointer;
+    }
+
+    #algorithmInfoBtn:hover {
+  background-color: #2d6548; /* Change background color on hover */
+}
+
+    h2 {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: 700; /* Use bold (700) font weight for headings */
+      text-align: center;
+      margin-top: 20px;
+    }
+
+   
+
+    .input-number {
+      width: 100%;
+      padding: 8px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    #runBtn {
+  background-color: #35a08e;
+  border: none; /* Remove border */
+  border-radius: 5px; /* Make ends rounded */
+  padding: 10px 20px; /* Adjust padding as needed */
+  color: #fff; /* Text color */
+  cursor: pointer;
+}
+#outputContent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#runBtn:hover {
+  background-color: #27746c; /* Change background color on hover */
+}
+    .btn {
+      padding: 10px 20px;
+      margin-top: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .btn-info {
+      background-color: #35a08e;
+      color: #fff;
+      border: none;
+    }
+
+    .btn-secondary {
+      background-color: #74ce9c;
+      color: #020000;
+      border: none;
+    }
+
+    .table-responsive {
+      margin-top: 20px;
+      padding: 10px;
+      overflow-x: auto; /* Add horizontal scrollbar if needed */
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #5c3838;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #b7dbcd;
+    }
+
+    tr:nth-child(even) {
+      background-color: #daece4;
+    }
+
+    #algorithmInfo {
+      width: 70%;
+      margin: 0 auto;
+    }
+
+    .algorithm_dropdown .btn {
+    background-color: #35a08e;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+  }
+
+  .algorithm_dropdown .dropdown-menu {
+    background-color: #bef0e6; /* Background color of dropdown menu */
+    border: 1px solid #35a08e; /* Border color of dropdown menu */
+    border-radius: 5px;
+  }
+  #algorithm_button {
+    background-color: rgb(134, 135, 133) !important; /* Change the background color to your desired color */
+}
+
+  .algorithm_dropdown .dropdown-menu li a {
+    color: #000; /* Text color of dropdown items */
+    padding: 8px 12px;
+    display: block;
+    text-decoration: none;
+  }
+
+  .algorithm_dropdown .dropdown-menu li a:hover {
+    background-color: #35a08e; /* Hover background color of dropdown items */
+    color: #fff; /* Hover text color of dropdown items */
+  }
+
+  </style>
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+  <link rel="stylesheet" type="text/css" href="./css/bootstrap-simplex.css">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="./css/explanation.css">
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  
+  <script src="./js/bootstrap.min.js"></script>
+  
+  <script src="./js/bootstrap-slider.js"></script>
+  <link rel="stylesheet" type="text/css" href="./css/cpu-scheduler.css">
+
+  <script type="text/x-mathjax-config">
+ 
+  </script>
+
+  <!-- <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script type="text/javascript" src="./js/MathJaxSetup.js">
+  </script>
+
+  
+
+<title>Page Replacement</title>
+</head>
+
+
+<div class="container">
+    <h2 style="text-align: center; margin-top: 20px;">Page Replacement</h2>
+    
+    <br>
+    <div id="cover">
+  <div class="row">
+    <div class="col-md-4">
+      <div style="display:inline-block;">
+        <label style="color:#020000;">Choose Algorithm:</label>
+      </div>
+      <div class="btn-group algorithm_dropdown" style="margin-left:5px;">
+        <button type="button" id="algorithm_button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+          MFU <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li><a calcStyle="MRU" id="simple_calc">Most Recently Used</a></li>
+          <li><a calcStyle="MFU" id="simple_calc">Most Frequently Used</a></li>
+          <li><a calcStyle="LFU" id="simple_calc">Least Frequently Used</a></li>
+          <li><a calcStyle="AddRef" id="simple_calc">Additional Reference Bit Algorithm</a></li>
+          <li><a calcStyle="SecChanc" id="simple_calc">Second Chance</a></li>
+          <!-- <li><a calcStyle="EnSecChan" id="fancy_calc">Enhanced Second Chance</a></li> -->
+        </ul>
+      </div>
+      <p style="margin-top:15px;" id="algorithm_explanation"></p>
+    </div><!-- /column -->
+  </div>
+</div>
+<div style="align-items:center; background-color:#d3e4dec9">
+
+
+      <div style="margin-top:20px; text-align: center; padding:10px;">
+        <labelclass="input-group" style="max-width: fit-content; margin-top:10px; color:#020000;">Number of frames:</label>
+      </div>
+      <div style="align-items:center; width:20%; margin-left: auto; margin-right:auto;">
+        <input id="frames" type="text" class="form-control input-number" style="background-color:rgb(241, 234, 236); ">
+      </div>
+      
+      <div style="margin-top:20px; text-align: center;">
+        <labelclass="input-group" style="max-width: fit-content; color:#020000;">Enter incoming stream (space-separated):</label>
+      </div>
+      <div style="align-items:center; width:50%; margin-left: auto; margin-right:auto;">
+        <input id="stream" type="text" name="quant[1]" class="form-control input-number" style="background-color:rgb(241, 234, 236); ">
+      </div>
+      
+      <!-- Run and Reset buttons -->
+      <div style="display: block; text-align: center; margin-top: 20px;">
+        <button id="runBtn"  style="padding: 10px 20px; ">Simulate Page Replacement</button>
+      </div>
+      <div style="display: block; text-align: center;">
+        
+        <button onclick="location.reload()" class="runButton btn btn-secondary" style="margin-top: 10px; padding: 10px 20px; margin-bottom:10px;">Reset Input</button>
+      </div>
+    </div><!-- /well -->
+  </div><!-- /container -->
+  <!-- Output Table -->
+  <h1 style="text-align: center; margin-top: 20px; padding: 10px 20px;">Output</h1>
+  <hr>
+  <div id="output" class="table-responsive" style="margin-top: 20px; padding: 10px;"></div>
+  <div style="text-align: center; margin-top: 20px;">
+    <button id="algorithmInfoBtn"  style="padding: 10px 20px; margin-bottom:20px;">Algorithm Information</button>
+</div>
+
+<div id="algorithmInfo" style="width: 70%; margin-left:auto; margin-right:auto">
+    <!-- Algorithm information will be displayed here -->
+</div>
+
+
+  <script src="page.js"></script>
+</body>
+
+</html>

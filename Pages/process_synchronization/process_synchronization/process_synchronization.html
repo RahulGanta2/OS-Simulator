@@ -1,0 +1,311 @@
+<html>
+
+<head>
+  <title>PROCESS SYNCHRONISATION</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <style id="plotly.js-style-global"></style>
+  <style id="plotly.js-style-global"></style>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="disk.js"></script>
+  <link rel="stylesheet" type="text/css"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <style>
+        *{
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .column {
+        padding: 15px;
+        display: flex;
+    }
+    .column1 {
+        width:48%;
+        border-radius: 44px;
+        background: lightgrey;
+        background: linear-gradient(145deg,rgb(249, 222, 225), rgb(255, 220, 225));
+        box-shadow: 2px 3px 3px pink,
+             2px 3px 3px rgb(255, 158, 174);   
+        float: left;
+        padding: 15px;
+        margin: 10px
+    }
+    .butn {
+        margin-top: 2.5%;
+        height: 41px;
+
+    }
+    .row{
+        display: flex;
+    }
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    .row1 {
+        padding-right: 15px;
+        height: 24vh;
+        margin-bottom: 0%;
+    }
+    .button {
+        background-color: #000;
+        color:#fff;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 4px 2px;
+        cursor: pointer;
+        transition-duration: 0.5s;
+        font-family: 'Outfit', sans-serif;
+        font-weight: 550;
+    }
+    .button1 {
+        background-color:#fff;
+        color: #000;
+        border-radius: 5px;
+        border: 2px solid #000;
+    }
+    .button1:hover {
+        background-color: #000;
+        color:#fff;
+    }
+    nav {
+        background-color:#fff;
+        height: 90px;
+        display: flex;
+        justify-content: space-between;
+        background: rgba(10, 4, 4, 0);
+        position: relative;
+    }
+    .logo {
+        border-radius: 12px;
+        margin: 15px;
+        margin-left: 4%;
+        padding: 18px 10px 2px 10px;
+        background: #231F20;
+        color: #fff;
+        text-align: center;
+        font: 20px 'Outfit', sans-serif;
+        justify-content: center;
+        font-weight: bolder;
+        cursor: pointer;
+
+    }
+    .logo:hover {
+        color:rgb(145, 145, 145);
+        text-decoration: none;
+    }
+    ul {
+        list-style: none;
+        margin-right: 4%;
+        padding: 0;
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        height: 100%;
+    }
+    li {
+        margin: 0 20px;
+    }
+    a {
+        color: #000;
+        text-decoration: none;
+        font-size: 20px;
+    }
+    a:hover{
+        color: #000;
+    }
+    /* dropdown*/
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        min-width: 135px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        background: rgba(2, 2, 0, 0.45);
+        border-radius: 5px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10.3px);
+        -webkit-backdrop-filter: blur(10.3px);
+
+    }
+    .dropdown-content a {
+        color: #000;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        border: none;
+        cursor: pointer;
+        transition-duration: 0.25s;
+        font-family: 'Outfit', sans-serif;
+        font-weight: 550;
+        font-size: small;
+
+    }
+    .dropdown-content a:hover {
+        background-color: #000;
+        color:#fff;
+        border-radius: 5px;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+    .centered-text {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .form-control{
+        color:rgb(170, 170, 170);
+    }
+    .col-form-control{
+        color: rgb(170, 170, 170);
+    }
+    .jumbotron{
+        background-color: aliceblue;
+    }
+  </style>
+</head>
+
+<body class="body_name">
+  <!-- Navigation Bar -->
+  <nav>
+    <a class="logo" href="../index.html"> OS VISUALIZER </a>
+    <ul>
+      <li><button onclick="location.href = '../index.html';" class="button button1">Home</button></li>
+      <li class="dropdown"><button class="button button1 dropbtn">Algorithms</button>
+        <div class="dropdown-content">
+          <a href="../process_scheduling/process.html">Process Scheduling</a>
+          <a href="../process_sync\home.html">Process Synchronization</a>
+          <a href="../Bankers/bankers.html">Bankers Algorithm</a>
+          <a href="../mft_mvt/Fit.html">Fit Algorithms</a>
+          <a href="../Page_Replacement Algo/page replacement_home.html">Page Replacement Algorithm</a>
+          <a href="../Disk/disk.html">Disk Scheduling</a>
+          <a href="../file allocation/file.html">File Allocation</a>
+          <a href="../mft_mvt\MVFT.html">MFT and MVT</a>
+        </div>
+      </li>
+      <li><button onclick=" window.location.href='../about.html'" class="button button1">About</button></li>
+    </ul>
+
+
+
+
+  </nav>
+
+  <div class="container-fluid">
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="jumbotron" style="background-color:aliceblue">
+          <h1 style="color:#000; background-color: aliceblue;font-size: 48px;text-align: center;" class="display-3" color="black"><strong>Process Synchronization</strong>
+          </h1>
+          <p style="color:#000; background-color: aliceblue;font-size: 20px;text-align: center;" class="lead">Process synchronisation is the coordination of the execution of many
+            processes in a multi-process system to make sure they have controlled and predictable access to common
+            resources. It seeks to fix the synchronisation problems in a concurrent system, including race conditions.It
+            provides the advantages of ensuring data integrity and uniformity, avoids race conditions, prevents data
+            from becoming inconsistent due to concurrent access, supports the wise and effective use of shared
+            resources.</p>
+        </div>
+        <div class="column1">
+          <h2 style="color:black">Producer-Consumer Problem</h2>
+          <p style="color:black">Producer consumer problem is a classical synchronization problem.
+            The problem is as follows: <br>
+            The solution to this problem is, to create two counting semaphores “full” and “empty” to keep track of the current number of full and empty buffers respectively. Producers produce a product and consumers consume the product, but both use of one of the containers each time. 
+            <br> We can solve this
+            problem by using semaphores.
+            A semaphore S is an integer variable that can be accessed only through two standard operations : wait() and
+            signal().
+            The wait() operation reduces the value of semaphore by 1 and the signal() operation increases its value by
+            1.
+            <br>
+            <p>To learn how this problem works : <a href="buffer.html">Click here</a></p>
+          </p>
+        </div>
+        <div class="column1">
+            <h2 style="color:black">Readers-Writers Problem</h2>
+            <p style="color:black">Reader writer problem is a classical synchronization problem. The problem is as follows: <br>
+                Suppose that a database is to be shared among several concurrent processes. Some of these processes may want only to read the database, whereas others may want to update (that is, to read and write) the database. We distinguish between these two types of processes by referring to the former as readers and to the latter as writers. Precisely in OS we call this situation as the readers-writers problem. Problem parameters are one set of data is shared among a number of processes, once a writer is ready, it performs its write, only one writer may write at a time, if a process is writing, no other process can read it, if at least one reader is reading, no other process can write, readers may not write and only read. 
+            </p>
+            <p>To learn how this problem works : <a href="read_write.html">Click here</a></p>
+          </div>
+          <div class="column1">
+            <h2 style="color:black">Dining-Philosophers Problem</h2>
+            <p style="color:black">The Dining Philosopher Problem states that K philosophers seated around a circular table with one chopstick between each pair of philosophers. There is one chopstick between each philosopher. A philosopher may eat if he can pickup the two chopsticks adjacent to him. One chopstick may be picked up by any one of its adjacent followers but not both. This problem involves the allocation of limited resources to a group of processes in a deadlock-free and starvation-free manner. 
+            </p>
+            <p>To learn how this problem works : <a href="philo.html">Click here</a></p>
+          </div>
+
+        <div class="column1">
+          <h2 style="color:black">Sleeping Barber Problem</h2>
+          <p style="color:black">The Sleeping Barber problem is a classic problem in process synchronization that is
+            used to illustrate synchronization issues that can arise in a concurrent system. The problem is as
+            follows:<br>
+
+            There is a barber shop with one barber and a number of chairs for waiting customers. Customers arrive at
+            random times and if there is an available chair, they take a seat and wait for the barber to become
+            available. If there are no chairs available, the customer leaves. When the barber finishes with a customer,
+            he checks if there are any waiting customers. If there are, he begins cutting the hair of the next customer
+            in the queue. If there are no customers waiting, he goes to sleep.
+            </p>
+            <p>To learn how this problem works : <a href="sleep_barber.html">Click here</a></p>
+        </div>
+
+      </div>
+    </div>
+
+    <br>
+    <br>
+  </div>
+  <!-- Code injected by live-server -->
+  <script>
+    // <![CDATA[  <-- For SVG support
+    if ('WebSocket' in window) {
+      (function () {
+        function refreshCSS() {
+          var sheets = [].slice.call(document.getElementsByTagName("link"));
+          var head = document.getElementsByTagName("head")[0];
+          for (var i = 0; i < sheets.length; ++i) {
+            var elem = sheets[i];
+            var parent = elem.parentElement || head;
+            parent.removeChild(elem);
+            var rel = elem.rel;
+            if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+              var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+              elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+            }
+            parent.appendChild(elem);
+          }
+        }
+        var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+        var address = protocol + window.location.host + window.location.pathname + '/ws';
+        var socket = new WebSocket(address);
+        socket.onmessage = function (msg) {
+          if (msg.data == 'reload') window.location.reload();
+          else if (msg.data == 'refreshcss') refreshCSS();
+        };
+        if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+          console.log('Live reload enabled.');
+          sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+        }
+      })();
+    }
+    else {
+      console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+    }
+  // ]]>
+  </script>
+
+
+</body>
+
+</html>

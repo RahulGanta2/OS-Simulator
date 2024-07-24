@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Allocation - Next Fit</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Memory Allocation - Next Fit</h1>
+        <nav>
+            <ul>
+                <li><a href="index_best_fit.html">Best Fit</a></li>
+                <li><a href="index_first_fit.html">First Fit</a></li> <!-- Added reference for First Fit -->
+                <li><a href="index_worst_fit.html">Worst Fit</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Memory Blocks</h2>
+        <div id="memoryBlocks">
+            <!-- Memory blocks will be dynamically added here -->
+        </div>
+
+        <h2>Processes</h2>
+        <form id="processesForm">
+            <label for="processCount">Enter the number of processes:</label>
+            <input type="number" id="processCount" required>
+            <button type="submit">Submit</button>
+        </form>
+
+        <div id="processesInput"></div>
+
+        <h2>Allocation Status</h2>
+        <div id="allocationStatus">
+            <!-- Allocation status will be dynamically updated here -->
+        </div>
+    </main>
+    <script src="script_next_fit.js"></script>
+</body>
+</html>

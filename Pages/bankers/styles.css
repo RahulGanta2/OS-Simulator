@@ -1,0 +1,138 @@
+/* Body styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f2f2f2;
+}
+
+/* Container styles */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
+  background-color: lightgray; /* Changed container background color */
+}
+
+/* Input container styles */
+#input-processes-resources, #input-max-allocated-available {
+  text-align: center; /* Center the content within this div */
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+/* Input field styles */
+input[type="number"], input[type="text"] {
+  width: 20px; /* Adjusted width */
+  height: 20px; /* Updated height */
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  outline: none; /* Remove outline */
+}
+
+input:focus {
+  outline: none;
+}
+
+/* Button styles with margin and padding */
+button {
+  padding: 12px 24px; /* Added padding */
+  background-color: teal;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* Hover effect for buttons */
+button:hover {
+  background-color: rgb(2, 93, 93);
+}
+
+/* Output area styles */
+#output-area {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+/* Table styles */
+.table-container {
+  margin-top: 20px;
+}
+
+.table-container table {
+  border-collapse: collapse;
+  width: auto;
+}
+
+.table-container th,
+.table-container td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.table-container th {
+  background-color: #f2f2f2;
+}
+
+.table-container input[type="text"] {
+  width: 40px; /* Adjust width as needed */
+  height: 20px;
+  padding: 5px;
+  border: none;
+  text-align: center;
+}
+
+.table-container input[type="text"]:focus {
+  outline: none;
+}
+
+/* Table alignment */
+table {
+  margin: 0 auto; /* Center-align the table */
+}
+
+/* Table header cell styles */
+th {
+  padding: 8px;
+  text-align: center;
+  background-color: #f2f2f2;
+}
+
+/* Table data cell styles */
+td {
+  padding: 8px;
+  text-align: center;
+}
+
+/* Bold process numbers */
+.bold-process {
+  font-weight: bold;
+}
+
+/* Output area styles */
+#output-area {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+/* Make safe sequence bold */
+#output-area b {
+  font-weight: bold;
+}

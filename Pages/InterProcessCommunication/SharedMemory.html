@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shared Memory</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #ffffff; 
+            color: #000000; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .custom-control-label::before {
+            background-color: #adb5bd; 
+        }
+        .well {
+            background-color: #f4f4f4;
+            border: 1px solid #e3e3e3;
+            border-radius: 4px;
+            padding:10px;
+            margin-bottom: 10px;;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+            }
+        .extra{
+            background-color: teal;
+        }
+        .extra:hover{
+            background-color: rgb(0, 87, 87);
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center">
+        <h1 class="mb-4">Shared Memory - Inter Process Communication</h1>
+        <div class="well">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="text-center">Process 1</h3>
+                    <form id="worker1-send">
+                        <div class="form-group">
+                            <label for="worker1-input">Process1: Write into Shared Memory</label>
+                            <input type="text" class="form-control" id="worker1-input">
+                        </div>
+                        <button type="submit" class="btn btn-primary extra">Write</button>
+                    </form>
+                    <br>
+                    <div class="form-group">
+                        <label for="worker1-output">Process1: Read from Shared Memory</label>
+                        <input type="text" class="form-control" id="worker1-output" readonly>
+                    </div>
+                    <button id="worker1-receive" class="btn btn-primary extra">Read</button>
+                </div>
+                <div class="col-md-6">
+                    <h3 class="text-center">Process 2</h3>
+                    <form id="worker2-send">
+                        <div class="form-group">
+                            <label for="worker2-input">Process2: Write into Shared Memory</label>
+                            <input type="text" class="form-control" id="worker2-input">
+                        </div>
+                        <button type="submit" class="btn btn-primary extra">Write</button>
+                    </form>
+                    <br>
+                    <div class="form-group">
+                        <label for="worker2-output">Process2: Read from Shared Memory</label>
+                        <input type="text" class="form-control" id="worker2-output" readonly>
+                    </div>
+                    <button id="worker2-receive" class="btn btn-primary extra">Read</button>
+                </div>
+            </div>
+        </div>
+        <div class="well">
+            <div class="row justify-content-center">
+                <div class="form-group">
+                    <label for="shared-memory">Shared Memory</label>
+                    <input type="text" class="form-control" id="shared-memory" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="well">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center">
+                    <div class="custom-control custom-checkbox">
+                        <label class="custom-control-label" for="bound-bool">Bound Buffer</label>
+                        <input type="checkbox" class="custom-control-input" id="bound-bool" onchange="toggleBuffer()">
+                    </div>
+                    <div id="numberInput" style="display: none;">
+                        <label for="buffer">Buffer:</label>
+                        <input type="number" class="form-control" id="buffer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script type = "worker">
+        self.onmessage = (rec_message)=>{
+            message=rec_message.data;
+            console.log("Recieved message:",message);
+            self.postMessage(message);
+            console.log("sent message back!",message);
+        }
+    </script>
+    
+    <script>
+        var bound;
+        function toggleBuffer() {
+            var checkbox = document.getElementById("bound-bool");
+            var numberInput = document.getElementById("numberInput");
+
+            if (checkbox.checked) {
+                numberInput.style.display = "block";
+            } else {
+                numberInput.style.display = "none";
+            }
+        }
+        url=URL.createObjectURL(new Blob([document.querySelector('script[type="worker"]').textContent]))
+        worker1 = new Worker(url);
+        worker2 = new Worker(url);
+        
+        function send(event,worker) {
+            if(worker === worker1){
+                if (bound === undefined){
+                    message=document.getElementById("worker1-input").value;
+                }
+                else{
+                    message=document.getElementById("worker1-input").value.slice(0,bound);
+                }
+            }
+            else {
+                if (bound === undefined){
+                    message=document.getElementById("worker2-input").value;
+                }
+                else{
+                    message=document.getElementById("worker2-input").value.slice(0,bound);
+                }
+            }
+            document.getElementById("shared-memory").value=message;
+            worker.postMessage(message);
+        }
+
+        worker1.onmessage = (rec_message)=>{
+            message=rec_message;
+        }
+
+        worker2.onmessage = (rec_message)=>{
+            message=rec_message;
+        }
+
+        document.getElementById("buffer").addEventListener("change",()=>{
+            bound=document.getElementById("buffer").value;
+        })
+
+        document.getElementById("worker1-send").addEventListener("submit",(event)=>{
+            event.preventDefault();
+            send(event,worker1);
+        });
+        document.getElementById("worker2-send").addEventListener("submit",(event)=>{
+            event.preventDefault();
+            send(event,worker2);
+        });
+        document.getElementById("worker1-receive").addEventListener("click",(event)=>{
+            document.getElementById("worker1-output").value=message.data;
+        });
+        document.getElementById("worker2-receive").addEventListener("click",(event)=>{
+            document.getElementById("worker2-output").value=message.data;
+        });
+    </script>
+</body>
+</html>

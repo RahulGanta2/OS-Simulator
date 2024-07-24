@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indirect Message Passing</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #ffffff; 
+            color: #000000; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .custom-control-label::before {
+            background-color: #adb5bd; 
+        }
+        #console {
+            background-color: #181818;
+            color: #d9d9d9;
+            font-family: monospace;
+            overflow-y: hidden;
+            margin: 0 auto;
+            padding-left: 10px;
+            max-height: 126px;
+            width : 500px;
+            text-align: left;
+            border-bottom-left-radius: 2px;
+            border-bottom-right-radius: 2px;
+
+        }
+        #console-head{
+            background-color: rgb(142, 138, 138);
+            padding-left: 5px;
+            font-family: monospace;
+            width : 500px;
+            margin: 0 auto;
+            text-align: left;
+            border-top-left-radius: 2px;
+            border-top-right-radius: 2px;
+
+        }
+        .well {
+            background-color: #f4f4f4;
+            border: 1px solid #e3e3e3;
+            border-radius: 4px;
+            padding:10px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+            }
+            .extra{
+                background-color: teal;
+            }
+            .extra:hover{
+                background-color: rgb(0, 87, 87);
+            }
+    </style>
+</head>
+<body>
+    <div class="container text-center">
+        <h1 class="mb-4" style = "margin-top: 15px;">Indirect Message Passing - Inter Process Communication</h1>
+        <div class = "well">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="text-center">Process 1</h3>
+                    <form id="worker1-send">
+                        <div class="form-group">
+                            <label for="worker1-input">Process1: Send to MailBox</label>
+                            <input type="text" class="form-control" id="worker1-input">
+                        </div>
+                        <button type="submit" class="btn btn-primary extra">Send</button>
+                    </form>
+                    <br>
+                    <div class="form-group">
+                        <label for="worker1-output">Process1: Recieve from MailBox</label>
+                        <input type="text" class="form-control" id="worker1-output" readonly>
+                    </div>
+                    <button id="worker1-receive" class="btn btn-primary extra">Recieve</button>
+                </div>
+                <div class="col-md-6">
+                    <h3 class="text-center">Process 2</h3>
+                    <form id="worker2-send">
+                        <div class="form-group">
+                            <label for="worker2-input">Process2: Send to MailBox</label>
+                            <input type="text" class="form-control" id="worker2-input">
+                        </div>
+                        <button type="submit" class="btn btn-primary extra">Send</button>
+                    </form>
+                    <br>
+                    <div class="form-group">
+                        <label for="worker2-output">Process2: Recieve from MailBox</label>
+                        <input type="text" class="form-control" id="worker2-output" readonly>
+                    </div>
+                    <button id="worker2-receive" class="btn btn-primary extra">Recieve</button>
+                </div>
+            </div>
+        </div>
+        <div style="display:flex; justify-content: center; margin-top: 10px; height :150px;">
+            <div style = "margin-right: 10px;">
+                <div id="console-head">Terminal</div>
+                <div id="console"></div>
+            </div>
+            <div class="well" style = "padding-bottom: 10px;">
+                <div class="col-md-6 text-center">
+                    <div class="custom-control custom-checkbox">
+                        <label class="custom-control-label" for="bound-bool">Bound Buffer</label>
+                        <input type="checkbox" class="custom-control-input" id="bound-bool" onchange="toggleBuffer()">
+                    </div>
+                    <div id="numberInput" style="display: none;">
+                        <label for="buffer">Buffer:</label>
+                        <input type="number" class="form-control" id="buffer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script id="process">
+        self.onmessage = (event)=>{
+            if (event.data.command == "connect"){
+                port2postbox = event.ports[0];
+                console.log("Successful connection made! - worker")
+            }
+            else if (event.data.command == "forward"){
+                    port2postbox.postMessage({command : "forward" , message : event.data.message});
+            }
+            port2postbox.onmessage = (event) =>{
+                if (event.data.command == "recieve"){
+                    self.postMessage(event.data.message);
+                    console.log("Recieved message!")
+                }
+            }
+        }
+    </script>
+    
+    <script id="postbox">
+        self.onmessage = (event)=>{
+            if (event.data.command == "connect"){
+                    port2Worker1 = event.ports[0];
+                    port2Worker2 = event.ports[1];
+                    console.log("Successful connection made! - postbox");
+            }
+            port2Worker1.onmessage=(event) => {
+                if (event.data.command == "forward"){
+                    port2Worker2.postMessage({command : "recieve" , message : event.data.message});
+                    console.log("Posting to Worker2!");
+                }
+            }
+            port2Worker2.onmessage=(event) => {
+                if (event.data.command == "forward"){
+                    port2Worker1.postMessage({command : "recieve" , message : event.data.message});
+                    console.log("Posting to Worker1!");
+                }
+            }
+        }
+    </script>
+    
+    <script id="main">
+        var bound;
+        var worker1_buffer , worker2_buffer;
+        function toggleBuffer() {
+            var checkbox = document.getElementById("bound-bool");
+            var numberInput = document.getElementById("numberInput");
+    
+            if (checkbox.checked) {
+                numberInput.style.display = "inline";
+            } else {
+                numberInput.style.display = "none";
+            }
+        }
+
+        function logToConsole(message) {
+            var consoleElement = document.getElementById('console');
+            consoleElement.innerHTML += '<div>' + message + '</div>';
+            consoleElement.scrollTop = consoleElement.scrollHeight;
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        
+        process_url=URL.createObjectURL(new Blob([document.querySelector('script[id="process"]').textContent]));
+        worker1 = new Worker(process_url);
+        worker2 = new Worker(process_url);
+    
+        postbox_url=URL.createObjectURL(new Blob([document.querySelector('script[id="postbox"]').textContent]));
+        postbox = new Worker(postbox_url);
+    
+        const worker1Channel = new MessageChannel();
+        const worker2Channel = new MessageChannel();
+        worker1.postMessage({command : "connect"},[ worker1Channel.port1 ]);
+        worker2.postMessage({command : "connect"},[ worker2Channel.port1 ]);
+        postbox.postMessage({command : "connect"},[ worker1Channel.port2 , worker2Channel.port2 ]);
+        async function connect() {
+            logToConsole("mailbox > Successful connection made!");
+            await sleep(100);
+            logToConsole("worker1 > Successful connection made!");
+            await sleep(100);
+            logToConsole("worker2 > Successful connection made!");
+        }
+        connect();
+        
+        function send(event,worker) {
+                if(worker === worker1){
+                    if (bound === undefined){
+                        message=document.getElementById("worker1-input").value;
+                    }
+                    else{
+                        message=document.getElementById("worker1-input").value.slice(0,bound);
+                    }
+                }
+                else {
+                    if (bound === undefined){
+                        message=document.getElementById("worker2-input").value;
+                    }
+                    else{
+                        message=document.getElementById("worker2-input").value.slice(0,bound);
+                    }
+                }
+                worker.postMessage({command : "forward" , message : message});
+            }
+    
+        document.getElementById("buffer").addEventListener("change",()=>{
+            bound=document.getElementById("buffer").value;
+        })
+    
+        document.getElementById("worker1-send").addEventListener("submit",(event)=>{
+            event.preventDefault();
+            send(event,worker1);
+            async function out1() {
+                logToConsole("worker1 > Posting to Mailbox!");
+                await sleep(100);
+                logToConsole("mailbox > Received message!");
+                await sleep(10);
+                logToConsole("mailbox > Posting to Worker2!");
+            }
+            out1();
+        });
+        document.getElementById("worker2-send").addEventListener("submit",(event)=>{
+            event.preventDefault();
+            send(event,worker2);
+            async function out2() {
+                logToConsole("worker1 > Posting to Mailbox!");
+                await sleep(100);
+                logToConsole("mailbox > Received message!");
+                await sleep(10);
+                logToConsole("mailbox > Posting to Worker2!");
+            }
+            out2();
+        });
+        worker1.onmessage = (rec_message)=>{
+            worker1_buffer=rec_message.data;
+        }
+    
+        worker2.onmessage = (rec_message)=>{
+            worker2_buffer=rec_message.data;
+        }
+        document.getElementById("worker1-receive").addEventListener("click",(event)=>{
+            document.getElementById("worker1-output").value=worker1_buffer;
+            if(worker1_buffer != undefined)logToConsole("Worker1 > Recieved message!");
+            worker1_buffer=undefined;
+        });
+    
+        document.getElementById("worker2-receive").addEventListener("click",(event)=>{
+            document.getElementById("worker2-output").value=worker2_buffer;
+            if(worker2_buffer != undefined)logToConsole("Worker2 > Recieved message!");
+            worker2_buffer=undefined;
+        });
+    
+    </script>
+</body>
+</html>

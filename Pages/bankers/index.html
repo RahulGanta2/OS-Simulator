@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banker's Algorithm</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        
+        <!-- First container: Input of number of processes and resources -->
+        <div id="input-processes-resources">
+            <label for="processes">Enter number of processes:</label>
+            <input id="processes" required>
+            <br>
+            <label for="resources">Enter number of resources:</label>
+            <input id="resources" required>
+            <br>
+            <button onclick="generateInputs()">Generate</button>
+        </div>
+        
+        <!-- Second container: Input of max, allocated, and available resources -->
+        <div id="input-max-allocated-available" style="display: none;">
+            <div class="table-container">
+                <!-- Table for allocation resources -->
+                <h3>Allocation Resources</h3>
+                <table id="allocation-table"></table>
+        
+                <!-- Table for max resources -->
+                <h3>Max Resources</h3>
+                <table id="max-table"></table>
+        
+                <!-- Table for available resources -->
+                <h3>Available Resources</h3>
+                <table id="available-table"></table>
+            </div>
+            <button onclick="calculateBankers()">Calculate</button>
+        </div>
+        
+        
+        <!-- Third container: Displaying the output -->
+        <div id="output-area" style="display: none;">
+            <!-- Output will be displayed here -->
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

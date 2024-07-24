@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producer Consumer Simulation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            width: 100px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 8px 16px;
+            background-color: #456ca0;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #456ca0;
+        }
+
+        .output {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 3px;
+            background-color: #f0f0f0;
+        }
+
+        #bufferContent {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            min-height: 40px;
+            background-color: #fff;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Producer Consumer Simulation</h1>
+        <div id="bufferSizeOutput">Buffer size: Not set</div>
+        <br>
+        <label for="bufferSize">Enter the buffer size:</label>
+        <input type="number" id="bufferSizeInput" min="1">
+        <button onclick="setBufferSize()">Set Buffer Size</button>
+        <br>
+        <label for="data">Enter data:</label>
+        <input type="number" id="data">
+        <button onclick="addData()">Add Data</button>
+        <br>
+        <button onclick="consumeData()">Consume Data</button>
+        <div class="output" id="actionOutput"></div>
+        <div id="bufferContent"></div>
+    </div>
+
+    <script>
+        const v = [];
+        let empty = 0;
+        let full = 0;
+        let mutex = 1;
+        let bufferSize = 0;
+
+        function wait(x) {
+            if (x > 0) {
+                x--;
+            }
+        }
+
+        function signal(x) {
+            x++;
+        }
+
+        function updateBufferContent() {
+            const bufferContentDiv = document.getElementById('bufferContent');
+            bufferContentDiv.innerHTML = '';
+            if (v.length > 0) {
+                bufferContentDiv.innerHTML = 'Buffer content: ' + v.join(' ');
+            } else {
+                bufferContentDiv.innerHTML = 'Buffer is Empty';
+            }
+        }
+
+        function setBufferSize() {
+            bufferSize = parseInt(document.getElementById('bufferSizeInput').value);
+            document.getElementById('bufferSizeOutput').innerHTML = 'Buffer size: ' + bufferSize;
+            updateBufferContent();
+        }
+
+        function addData() {
+            const inputData = document.getElementById('data').value.trim();
+
+            if (bufferSize === 0) {
+                document.getElementById('actionOutput').innerHTML = 'Buffer size not set';
+                return;
+            }
+
+            if (inputData === '') {
+                document.getElementById('actionOutput').innerHTML = 'No data entered';
+                return;
+            }
+
+            const inputDataInt = parseInt(inputData);
+
+            if (!isNaN(inputDataInt) && v.length < bufferSize && mutex === 1) {
+                wait(empty);
+                wait(mutex);
+                v.push(inputDataInt);
+                signal(mutex);
+                signal(full);
+                document.getElementById('actionOutput').innerHTML = 'Produced data: ' + inputDataInt;
+                updateBufferContent();
+            } else {
+                document.getElementById('actionOutput').innerHTML = 'Buffer is Full';
+            }
+        }
+
+        function consumeData() {
+            if (bufferSize === 0) {
+                document.getElementById('actionOutput').innerHTML = 'Buffer size not set';
+                return;
+            }
+
+            if (empty !== bufferSize && mutex === 1) {
+                wait(full);
+                wait(mutex);
+                const consumedData = v.shift(); // Remove and return first element (FIFO)
+                signal(mutex);
+                signal(empty);
+                document.getElementById('actionOutput').innerHTML = 'Consumed data: ' + (consumedData !== undefined ? consumedData : 'Buffer is Empty');
+                updateBufferContent();
+            } else {
+                document.getElementById('actionOutput').innerHTML = 'Buffer is Empty';
+            }
+        }
+    </script>
+</body>
+</html>

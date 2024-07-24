@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dining Philosopher's Problem</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        #container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #456ca0;
+            color: #fff;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #456ca0;
+        }
+
+        #eating {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Dining Philosopher's Problem</h1>
+        <div id="output"></div>
+        <div id="eating"></div>
+        <div>
+            <button class="btn" onclick="performAction(0, 1)">Philosopher 1: Eat</button>
+            <button class="btn" onclick="performAction(0, 0)">Philosopher 1: Stop Eating</button>
+        </div>
+        <div>
+            <button class="btn" onclick="performAction(1, 1)">Philosopher 2: Eat</button>
+            <button class="btn" onclick="performAction(1, 0)">Philosopher 2: Stop Eating</button>
+        </div>
+        <div>
+            <button class="btn" onclick="performAction(2, 1)">Philosopher 3: Eat</button>
+            <button class="btn" onclick="performAction(2, 0)">Philosopher 3: Stop Eating</button>
+        </div>
+        <div>
+            <button class="btn" onclick="performAction(3, 1)">Philosopher 4: Eat</button>
+            <button class="btn" onclick="performAction(3, 0)">Philosopher 4: Stop Eating</button>
+        </div>
+        <div>
+            <button class="btn" onclick="performAction(4, 1)">Philosopher 5: Eat</button>
+            <button class="btn" onclick="performAction(4, 0)">Philosopher 5: Stop Eating</button>
+        </div>
+    </div>
+
+    <script src="dining.js"></script>
+</body>
+</html>

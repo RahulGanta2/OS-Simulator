@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linked File Allocation Demo</title>
+<style>
+  /* CSS for styling */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #bea2f6;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  h1 {
+    color: #333;
+    margin-top: 20px;
+  }
+
+  p {
+    color: #666;
+    margin-bottom: 20px;
+  }
+
+  #blocks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .block {
+    border: 1px solid #333;
+    padding: 10px;
+    margin: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+  }
+
+  .block:hover {
+    transform: translateY(-3px);
+  }
+
+  .pointer {
+    color: red;
+  }
+
+  .address {
+    color: blue;
+  }
+
+  .allocated {
+    background-color: #ffcccc;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+
+  button:hover {
+    background-color: #45a049;
+  }
+
+</style>
+</head>
+<body>
+<h1>Linked File Allocation in OS</h1>
+<p>This is a demonstration of linked file allocation used in operating systems.</p>
+<p>Block no 120 and 128 are preallocated these are preallocated </p>
+
+<div id="blocks">
+  <!-- Pre-allocated blocks -->
+  <div class="block allocated">Block A <span class="address">[100]</span> <span class="pointer">--></span></div>
+  <div class="block">Block B <span class="address">[104]</span> <span class="pointer">--></span></div>
+  <div class="block allocated">Block C <span class="address">[108]</span> <span class="pointer">--></span></div>
+  <!-- More blocks can be added here -->
+</div>
+
+<p>In linked file allocation, each block contains a pointer to the next block. This allows files to be stored in non-contiguous blocks on the disk.</p>
+
+<button onclick="addBlock()">Add Block</button>
+<button onclick="removeBlock()">Remove Block</button>
+
+<script>
+  // JavaScript for functionality
+  let nextAddress = 112; // Starting address for the next block
+  let allocatedBlocks = [100, 108]; // List of pre-allocated block addresses
+
+  function findNextAvailableAddress() {
+    while (allocatedBlocks.includes(nextAddress) || nextAddress === 120 || nextAddress === 128) {
+        if (nextAddress === 120 || nextAddress === 128) {
+            nextAddress += 8; // Increment by 8 if nextAddress is 120 or 128
+        } else {
+            nextAddress += 4; // Increment by 4 otherwise
+        }
+    }
+    return nextAddress;
+}
+
+  function addBlock() {
+    var blocksDiv = document.getElementById('blocks');
+    var availableAddress = findNextAvailableAddress(); // Find the next available address
+    var newBlock = document.createElement('div');
+    newBlock.className = 'block';
+    newBlock.innerHTML = 'New Block <span class="address">[' + availableAddress + ']</span> <span class="pointer">--></span>';
+    blocksDiv.appendChild(newBlock);
+    nextAddress += 4; // Prepare the address for the next block
+    updatePointers();
+  }
+
+  function removeBlock() {
+    var blocksDiv = document.getElementById('blocks');
+    if (blocksDiv.children.length > 1) {
+      blocksDiv.removeChild(blocksDiv.lastChild);
+      nextAddress -= 4; // Decrement the address for the next block
+      updatePointers();
+    } else {
+      alert('Cannot remove the last block!');
+    }
+  }
+
+  function updatePointers() {
+    var blocks = document.querySelectorAll('#blocks .block');
+    blocks.forEach(function(block, index) {
+      var pointer = block.querySelector('.pointer');
+      if (index === blocks.length - 1) {
+        pointer.classList.add('hidden');
+      } else {
+        pointer.classList.remove('hidden');
+      }
+    });
+  }
+</script>
+
+</body>
+</html>

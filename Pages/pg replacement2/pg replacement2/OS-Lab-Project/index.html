@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My First HTML Page</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit&display=swap" rel="stylesheet">
+    <style>
+    body {
+        font-family: 'Outfit', sans-serif; /* Use the 'Outfit' font for the entire page */
+        margin: 0; /* Remove default margin */
+        padding: 0; /* Remove default padding */
+    }
+
+    nav {
+        background-color: #333; /* Dark background color for the navigation bar */
+        padding: 20px; /* Add some padding to the navigation bar */
+    }
+
+    .logo {
+        color: rgb(139, 43, 93); /* White color for the logo text */
+        font-size: 24px; /* Increase font size for the logo text */
+        text-decoration: none; /* Remove underline from the logo text */
+    }
+
+    .logo:hover {
+        text-decoration: underline; /* Underline the logo text on hover */
+    }
+
+    ul {
+        list-style-type: none; /* Remove default bullet points from the list */
+        margin: 0; /* Remove default margin */
+        padding: 0; /* Remove default padding */
+    }
+
+    .button {
+        background-color: #4CAF50; /* Green background color for the button */
+        border: none; /* Remove border */
+        color: white; /* White text color */
+        padding: 10px 20px; /* Add some padding */
+        text-align: center; /* Center align text */
+        text-decoration: none; /* Remove underline */
+        display: inline-block; /* Make it display as inline block */
+        font-size: 16px; /* Set font size */
+        margin: 4px 2px; /* Add margin */
+        cursor: pointer; /* Add pointer cursor on hover */
+    }
+
+    .button:hover {
+        background-color: #45a049; /* Darker green background color on hover */
+    }
+
+    .container-fluid {
+        padding: 20px; /* Add some padding to the container */
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .column1 {
+        width: 100%; /* Make the column take up full width */
+        padding: 20px; /* Add some padding */
+        background-color: #5d8564; /* Yellow background color */
+        color: rgb(98, 157, 131); /* Black text color */
+        margin-bottom: 20px; /* Add some margin at the bottom */
+        box-sizing: border-box; /* Include padding and border in element's total width and height */
+    }
+
+    .column1 a {
+        color: black; /* Black color for links */
+        text-decoration: none; /* Remove underline from links */
+    }
+
+    .column1 a:hover {
+        text-decoration: underline; /* Underline links on hover */
+    }
+</style>
+
+    <!-- <style>
+        .column1 {
+            width: calc(42% - 25px);
+            padding: 20px;
+            margin: 30px;
+            background-color: #FCBA28;
+            color: black;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+    </style> -->
+</head>
+
+<body>
+    <nav>
+        <a class="logo" href="index.html"> PAGE REPLACEMENT </a>
+        <ul>
+            <!-- <li><button class="button button1">Home</button></li> -->
+            <button onclick=" window.location.href='about.html'"class="button button1">About</button>
+        </ul>
+    </nav>
+    <!-- <div class ="container">
+        <img src="land.jpeg" style="width: 500px;"> 
+    </div> -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="column1" style="background-color:#FCBA28">
+                <a style="color:black ; font-size:xx-large;" href="Page_Replacement Algo/page replacement_home.html">Page Replacement Algorithm</a>
+                <p style="color:black">Page replacement algorithms are crucial in memory management for operating systems. They decide which pages to remove from memory when space is limited. The choice of algorithm depends on system characteristics and workload patterns. these algorithms play a crucial role in efficient memory management, allowing processes to execute smoothly even when the available physical memory is limited.</p>
+                <a href="../Page_Replacement Algo/page replacement_home.html" style="color: black;" >Go to Simulation</a>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+</body>
+
+</html>

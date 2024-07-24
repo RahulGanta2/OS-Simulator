@@ -1,0 +1,37 @@
+Process scheduling - 
+
+Process scheduling manages the order in which processes access CPU resources in an operating system. Various algorithms like FCFS, SJF, Round Robin, and Priority scheduling determine the sequence of execution. Schedulers aim to optimize CPU utilization, minimize response time, and ensure fairness among processes. Context switching facilitates the transition between processes, enabling multitasking and efficient resource allocation. Scheduling policies may prioritize processes based on factors like priority level, burst time, or arrival time, influencing system performance and responsiveness. Effective scheduling is crucial for system efficiency and responsiveness in multitasking environments.
+
+IPC - 
+
+Inter-process communication (IPC) facilitates data exchange and synchronization between processes running concurrently on a system. It allows processes to share information, coordinate activities, and communicate efficiently. IPC mechanisms include shared memory, message passing, pipes, sockets, and signals. These mechanisms enable processes to collaborate, coordinate, and exchange data, enhancing the functionality and performance of multi-process systems. IPC is crucial for interactivity, parallelism, and cooperation among processes in modern operating systems and distributed computing environments.
+
+Contigous memory allocation techniques - 
+
+Contiguous memory allocation techniques assign each process a contiguous block of memory. Examples include the first-fit, best-fit, and worst-fit algorithms, which allocate memory based on size and availability. These techniques minimize fragmentation but may lead to inefficient memory usage due to fragmentation. Contiguous allocation is common in systems where memory management is relatively simple, such as early versions of operating systems or embedded systems. It enables efficient access to memory but may suffer from external fragmentation over time, requiring periodic memory compaction or relocation.
+
+Process synchronization - 
+
+Process synchronization ensures orderly execution of concurrent processes to prevent race conditions and maintain consistency in shared resources. Techniques like mutexes, semaphores, and condition variables coordinate access to critical sections, preventing issues like deadlock, starvation, and synchronization problems such as the reader-writer problem. These mechanisms enforce access control policies, ensuring data integrity and system stability in multi-process environments.
+
+Page replacement algorithm - 
+
+Page replacement algorithms manage memory by swapping out pages from RAM when it's full, aiming to minimize page faults. Examples include FIFO, LRU, and Optimal, each prioritizing different pages for replacement based on past or predicted access patterns. These algorithms balance between performance and simplicity, with FIFO being straightforward but prone to the Belady's anomaly, while LRU and Optimal offer better performance at the cost of increased complexity and computational overhead. Page replacement algorithms are crucial for efficient memory management in operating systems, ensuring optimal resource utilization and system responsiveness.
+
+Disk scheduling - 
+
+Disk scheduling algorithms determine the order in which disk I/O requests are serviced, optimizing disk access time and throughput. Examples include FCFS, SSTF, SCAN, C-SCAN, LOOK, and C-LOOK, each with different strategies for selecting the next request. FCFS serves requests in the order they arrive, while SSTF prioritizes the closest request to the current head position. SCAN and C-SCAN scan the disk in a specific direction, while LOOK and C-LOOK only move to the outermost or innermost request in the current direction. These algorithms balance between minimizing seek time and ensuring fair access to disk resources, enhancing disk performance in operating systems and storage systems.
+
+Paging - 
+
+Paging is a memory management scheme used by operating systems to divide physical memory into fixed-size blocks called pages. Processes are similarly divided into fixed-size blocks called frames. Paging allows for efficient memory allocation and address translation, reducing external fragmentation. It enables the operating system to manage memory more flexibly and efficiently, facilitating multitasking and virtual memory. Paging provides a uniform and abstract view of memory to processes, enhancing system stability and scalability.
+
+File allocation - 
+
+File allocation algorithms determine how files are stored on disk and manage disk space allocation. Examples include contiguous, linked, and indexed allocation. Contiguous allocation stores files as continuous blocks on disk, reducing fragmentation but limiting flexibility. Linked allocation uses pointers to connect blocks, allowing for dynamic file sizes but increasing overhead. Indexed allocation maintains an index block for each file, enabling fast access and efficient space utilization. These algorithms balance between performance, storage efficiency, and simplicity, influencing file system design and optimization in operating systems.
+
+Banker's algorithm - 
+
+The Banker's algorithm is a deadlock avoidance method used by operating systems to ensure safe resource allocation. It tracks the available resources and the maximum resources each process may need to complete. By simulating the allocation process, it determines whether granting a resource request would lead to a safe state, preventing deadlocks. The algorithm ensures that resources are allocated in a way that satisfies the system's safety, avoiding deadlock situations. It's based on the principle of not allocating resources if the system's safety is compromised, thereby guaranteeing system integrity and preventing resource contention issues.
+
+

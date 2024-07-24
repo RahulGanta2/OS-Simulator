@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paging</title>
+<link rel="stylesheet" href="paging-css.css">
+</head>
+<body>
+    <nav>
+        <a class="logo" href="../index.html"> OS VISUALIZER </a>
+        <ul>
+            <li><button onclick="location.href = '../index.html';" class="button button1">Home</button></li>
+            <li class="dropdown"><button class="button button1 dropbtn">Algorithms</button>
+                <div class="dropdown-content">
+                    <a href="../process_scheduling/process.html">Process Scheduling</a>
+                    <a href="../process_sync\home.html">Process Synchronization</a>
+                    <a href="../Bankers/bankers.html">Bankers Algorithm</a>
+                    <a href="../mft_mvt/Fit.html">Fit Algorithms</a>
+                    <a href="../Page_Replacement Algo/page replacement_home.html">Page Replacement Algorithm</a>
+                    <a href="../Disk/disk.html">Disk Scheduling</a>
+                    <a href="../file allocation/file.html">File Allocation</a>
+                    <a href="../mft_mvt\MVFT.html">MFT and MVT</a>
+                </div>
+            </li>
+            <li><button onclick=" window.location.href='../about.html'" class="button button1">About</button></li>
+        </ul>
+        </ul>
+        </div>
+        </ul>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+
+            <script>
+                function admSelectCheck(nameSelect) {
+                    console.log(nameSelect);
+                    if (nameSelect) {
+                        x3 = document.getElementById("o3").value;
+                        x4 = document.getElementById("o4").value;
+                        x5 = document.getElementById("o5").value;
+                        x6 = document.getElementById("o6").value;
+                        x7 = document.getElementById("o7").value;
+                        if (x3 == nameSelect.value || x4 == nameSelect.value || x5 == nameSelect.value || x6 == nameSelect.value || x7 == nameSelect.value) {
+                            document.getElementById("admDivCheck").style.display = "block";
+                        }
+                        else {
+                            document.getElementById("admDivCheck").style.display = "none";
+                        }
+                    }
+                    else {
+                        document.getElementById("admDivCheck").style.display = "none";
+                    }
+                }
+            </script>
+
+        </div>
+  <div class="container">
+    <div class="heading-container">
+        <div class="heading">
+            <h1 class="heading1">Paging</h1>
+            <p class="header-text">Paging is a memory management scheme that eliminates the need for a contiguous allocation of physical memory. In paging, the physical memory is divided into fixed-size blocks called page frames, which are the same size as the pages used by the process. The process’s logical address space is also divided into fixed-size blocks called pages, which are the same size as the page frames. When a process requests memory, the operating system allocates one or more page frames to the process and maps the process’s logical pages to the physical page frames.</p>
+        </div>
+    </div>
+    <div class="main-body-container">
+        <div class="main-body">
+            <div class="mem-size">
+                <label for="memorySize">Memory Size</label>
+                <input type="number" placeholder="Enter the memory size (in bytes)" id="memorySize">
+            </div>
+        <div class="page-size">
+            <label for="pageSize">Page Size</label>
+            <input type="number" placeholder="Enter the page size (in bytes)" id="pageSize">
+        </div>
+        <div class="processes">
+            <label for="numProcesses">Number of Processes</label>
+            <input type="number" placeholder="Enter the number of processes" id="numProcesses" name="numProcesses">
+        </div> 
+    </div> 
+        <div class="main-body-simulation">
+            <div class="inputs">
+                <h2>Process Inputs : </h2>
+                <div id="pageInputs"></div>
+            </div>
+        </div>
+            <div class="main-body-output">
+                <button onclick="simulate()">Simulate</button>
+                <div id="output"></div>
+            </div>
+        </div>
+  </div>
+  <script src="paging-js.js"></script>
+</body>
+</html>

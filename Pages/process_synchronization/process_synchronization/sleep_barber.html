@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sleeping Barbers Problem</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .output {
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #456ca0;
+            color: #fff;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #456ca0;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+        <h1>Sleeping Barbers Problem</h1>
+
+        <div class="output">
+            <h2>Barber Status:</h2>
+            <div id="barberStatus">Sleeping</div>
+        </div>
+
+        <div class="output">
+            <h2>Waiting Customers:</h2>
+            <div id="waitingCustomers">0</div>
+        </div>
+
+        <button class="btn" onclick="addCustomer()">Add Customer</button>
+        <button class="btn" onclick="startBarber()">Start Barber</button>
+        <div id="status"></div>
+    </div>
+
+    <script src="sleeping_barbers.js"></script>
+</body>
+</html>

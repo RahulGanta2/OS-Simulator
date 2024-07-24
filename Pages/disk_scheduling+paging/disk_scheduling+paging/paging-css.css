@@ -1,0 +1,221 @@
+body {
+    font-family: Arial, sans-serif;
+    margin-left: 2%;
+}
+.button {
+    background-color: #000;
+    color:#fff;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition-duration: 0.5s;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 550;
+}
+.butn {
+    margin-top: 2.5%;
+    height: 41px;
+}
+.button1 {
+    background-color:#fff;
+    color: #000;
+    border-radius: 5px;
+    border: 2px solid #000;
+}
+.button1:hover {
+    background-color: #000;
+    color:#fff;
+}
+nav {
+    background-color:#fff;
+    height: 90px;
+    display: flex;
+    justify-content: space-between;
+    background: rgba(10, 4, 4, 0);
+    position: relative;
+}
+.logo {
+    border-radius: 12px;
+    margin: 15px;
+    margin-left: 4%;
+    padding: 18px 10px 2px 10px;
+    background: #231F20;
+    color: #fff;
+    text-align: center;
+    font: 20px 'Outfit', sans-serif;
+    justify-content: center;
+    font-weight: bolder;
+    cursor: pointer;
+
+}
+.logo:hover {
+    color:rgb(145, 145, 145);
+    text-decoration: none;
+}
+ul {
+    list-style: none;
+    margin-right: 4%;
+    padding: 0;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    height: 100%;
+}
+li {
+    margin: 0 20px;
+}
+a {
+    color: #000;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+/* dropdown*/
+.dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 135px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    background: rgba(2, 2, 0, 0.45);
+    border-radius: 5px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10.3px);
+    -webkit-backdrop-filter: blur(10.3px);
+
+}
+.dropdown-content a {
+    color: #000;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border: none;
+    cursor: pointer;
+    transition-duration: 0.25s;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 550;
+    font-size: small;
+
+}
+.dropdown-content a:hover {
+    background-color: #000;
+    color:#fff;
+    border-radius: 5px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.container{
+    margin-top: 1rem;
+}
+.heading-container{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    width: 96%;
+}
+.heading{
+    background-color: aliceblue;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+}
+.heading1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+}
+.heading-text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    text-align: center;
+}
+.main-body-container{
+    background-color: rgb(249, 229, 232);
+    border-radius: 10px;
+    margin-top: 2rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    width: 86%;
+    padding-bottom: 1rem;
+}
+.main-body{
+    display: flex;
+    justify-content: space-between;
+}  
+.main-body-simulation{
+    display: flex;
+    margin-top: 2rem;
+}
+.main-body-output{
+    margin-top: 1rem;
+}
+.mem-size{
+    margin: 1rem 1rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    width:14rem;
+}
+label{
+    text-align: center;
+}
+input {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.7rem;
+}
+.page-size{
+    margin: 1rem 1rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    width:14rem;
+}
+  .processes{
+    margin: 1rem 1rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    width:14rem;
+  }
+  .inputs{
+    display: flex;
+    align-items: center;
+  }
+  .inputs input{
+    width: 16rem;
+  }
+  
+  #pageInputs {
+    margin-left: 1rem;
+  }
+  
+  #output {
+    margin-top: 20px;
+    color: black;
+  }
+  .main-body-output button{
+        background-color: #fff;
+        color: grey;
+        border-width: 0.1px;
+        border-radius: 10px;
+        padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+        margin-left: 91%;
+  }
+.main-body-output button:hover{
+    cursor: pointer;
+    color: #000;
+}
